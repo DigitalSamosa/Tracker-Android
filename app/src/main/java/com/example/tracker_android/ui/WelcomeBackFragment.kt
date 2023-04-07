@@ -40,7 +40,11 @@ class WelcomeBackFragment : Fragment() {
 //    }
 
     internal fun setClickListeners() {
-        binding.button2.setOnClickListener {
+        binding.toSignInButton.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.welcome_back_container, SignInFragment.newInstance()).commitNow()
+        }
+
+        binding.backButton.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.welcome_back_container, WelcomeFragment.newInstance()).commitNow()
         }
     }
