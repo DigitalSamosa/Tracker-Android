@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tracker_android.R
+import com.example.tracker_android.databinding.FragmentWelcomeBackBinding
 
 class WelcomeBackFragment : Fragment() {
 
@@ -15,17 +17,32 @@ class WelcomeBackFragment : Fragment() {
     }
 
     private lateinit var viewModel: WelcomeBackViewModel
+    private lateinit var binding: FragmentWelcomeBackBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentWelcomeBackBinding.inflate(inflater, container, false)
+        val view = binding.root
         viewModel = ViewModelProvider(this)[WelcomeBackViewModel::class.java]
-        return inflater.inflate(R.layout.fragment_welcome_back, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setClickListeners()
+    }
+
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        binding = null
+//    }
+
+    internal fun setClickListeners() {
+        binding.button2.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.welcome_back_container, WelcomeFragment.newInstance()).commitNow()
+        }
     }
 
 }

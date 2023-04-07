@@ -9,9 +9,12 @@ class MainActivity : FragmentActivity() {
     private val buildConfig = BuildConfig
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val binding =
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            buildConfig.checkFirstRun(supportFragmentManager, this)
+            // disabled for testing
+//            buildConfig.checkFirstRun(supportFragmentManager, this)
+            supportFragmentManager.beginTransaction().replace(R.id.container, WelcomeFragment.newInstance()).commitNow()
         }
         actionBar?.hide()
     }
