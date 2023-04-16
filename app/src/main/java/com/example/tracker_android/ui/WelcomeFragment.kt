@@ -2,32 +2,35 @@ package com.example.tracker_android.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.example.tracker_android.R
+import com.example.tracker_android.controller.MainController
 import com.example.tracker_android.databinding.FragmentWelcomeBinding
-import com.google.android.material.button.MaterialButton
+import com.example.tracker_android.util.FragmentHelper
 
 class WelcomeFragment : Fragment() {
 
     companion object {
         fun newInstance() = WelcomeFragment()
     }
+    val fragmentHelper = FragmentHelper()
 
     private lateinit var viewModel: WelcomeViewModel
-    private lateinit var _binding: FragmentWelcomeBinding
-
+    private var _binding: FragmentWelcomeBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        val view = _binding!!.root
+        val view = binding.root
         viewModel = ViewModelProvider(this)[WelcomeViewModel::class.java]
+        Log.d("dexter", "welcome fragment")
+        MainController.welcomeFragmentReady(this)
         return view
     }
 
@@ -39,12 +42,12 @@ class WelcomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-//        _binding = null
+        _binding = null
     }
 
     internal fun setClickListeners() {
-        _binding.button.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.welcome_container, WelcomeBackFragment.newInstance()).commitNow()
+        binding.button.setOnClickListener {
+            fragmentHelper.showAndAddToBackStack(HomePageFragment.newInstance())
         }
     }
 

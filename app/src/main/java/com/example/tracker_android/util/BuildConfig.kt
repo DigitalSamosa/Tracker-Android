@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import com.example.tracker_android.BuildConfig
 import com.example.tracker_android.R
-import com.example.tracker_android.ui.WelcomeBackFragment
+import com.example.tracker_android.ui.HomePageFragment
 import com.example.tracker_android.ui.WelcomeFragment
 
 object BuildConfig {
@@ -16,7 +16,7 @@ object BuildConfig {
 
         if (currentVersionCode == savedVersionCode) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, WelcomeBackFragment.newInstance())
+                .replace(R.id.container, HomePageFragment.newInstance())
                 .commitNow()
         } else if (savedVersionCode == Constants.PREF_VERSION_DOESNT_EXIST) {
             supportFragmentManager.beginTransaction()

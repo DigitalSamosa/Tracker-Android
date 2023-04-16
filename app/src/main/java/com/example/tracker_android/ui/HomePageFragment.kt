@@ -1,40 +1,38 @@
 package com.example.tracker_android.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tracker_android.databinding.FragmentSignInBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.tracker_android.databinding.FragmentHomePageBinding
 import com.example.tracker_android.util.FragmentHelper
 
-class SignInFragment : Fragment() {
+class HomePageFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SignInFragment()
+        fun newInstance() = HomePageFragment()
     }
     val fragmentHelper = FragmentHelper()
 
-    private lateinit var viewModel: SignInViewModel
-    private var _binding: FragmentSignInBinding? = null
+    private lateinit var viewModel: HomePageViewModel
+    private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        _binding = FragmentHomePageBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomePageViewModel::class.java]
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
-        // TODO: Use the ViewModel
     }
 
     override fun onDestroyView() {
@@ -43,7 +41,11 @@ class SignInFragment : Fragment() {
     }
 
     internal fun setClickListeners() {
-        binding.signInBackButton.setOnClickListener {
+        binding.toSignInButton.setOnClickListener {
+            fragmentHelper.showAndAddToBackStack(SignInFragment.newInstance())
+        }
+
+        binding.backButton.setOnClickListener {
             fragmentHelper.fragmentOnBackPressed()
         }
     }

@@ -7,7 +7,7 @@
     android:theme="@style/Theme.Tracker.Dark"
     android:background="?android:windowBackground"
     android:id="@+id/welcome_back_container"
-    tools:context=".ui.WelcomeBackFragment">
+    tools:context=".ui.HomePageFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
