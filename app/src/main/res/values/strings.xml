@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Tracker-Android</string>
     <string name="welcome_back">Welcome Back!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_desc">Tracker can help you log and keep track of your menstrual cycle. Sign up below to enable sharing features. Don\'t worry \- you can still access all other features without an account.</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="remind_me_later">Remind me later</string>
 </resources>

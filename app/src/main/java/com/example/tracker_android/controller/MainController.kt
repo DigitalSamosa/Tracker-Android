@@ -3,10 +3,12 @@ package com.example.tracker_android.controller
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.Lifecycle
 import com.example.tracker_android.ui.FragmentHostActivity
 import com.example.tracker_android.ui.HomePageFragment
 import com.example.tracker_android.ui.WelcomeFragment
+import com.example.tracker_android.util.Constants
 import com.example.tracker_android.util.FragmentHelper
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -21,6 +23,7 @@ object MainController {
     internal lateinit var waitForActivity: CancellableContinuation<FragmentHostActivity>
     internal lateinit var waitForWelcomeFragment: CancellableContinuation<WelcomeFragment>
     internal lateinit var waitForHomePageFragment: CancellableContinuation<HomePageFragment>
+    internal lateinit var sharedPrefs: SharedPreferences
 
     private val fragmentHelper = FragmentHelper()
 
@@ -32,6 +35,7 @@ object MainController {
         } else {
             context.applicationContext as Application
         }
+        sharedPrefs = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE)
         return this
     }
 
@@ -70,7 +74,7 @@ object MainController {
         if (!::homePageFragment.isInitialized || homePageFragment.lifecycle.currentState != Lifecycle.State.RESUMED) {
             homePageFragment = suspendCancellableCoroutine {
                 waitForHomePageFragment = it
-                fragmentHelper.showAndAddToBackStack(HomePageFragment.newInstance())
+                fragmentHelper.showAndAddToBackStack(HomePageFragment.newInstance(), animEnter = android.R.anim.fade_in)
             }
         }
         return homePageFragment

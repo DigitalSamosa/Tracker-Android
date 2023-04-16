@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.tracker_android.R
 import com.example.tracker_android.databinding.FragmentHomePageBinding
 import com.example.tracker_android.util.FragmentHelper
 
@@ -32,6 +33,7 @@ class HomePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentHelper.showAndAddToBackStack(WelcomeFragment.newInstance(), animEnter = R.anim.slide_up, animPop = R.anim.slide_down)
         setClickListeners()
     }
 
@@ -46,7 +48,7 @@ class HomePageFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            fragmentHelper.fragmentOnBackPressed()
+            fragmentHelper.showAndAddToBackStack(WelcomeFragment.newInstance(), animEnter = R.anim.slide_up, animPop = R.anim.slide_down)
         }
     }
 

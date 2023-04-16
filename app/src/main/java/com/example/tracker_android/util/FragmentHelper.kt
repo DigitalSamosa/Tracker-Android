@@ -1,6 +1,7 @@
 package com.example.tracker_android.util
 
 import android.content.Intent
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import com.example.tracker_android.R
 import com.example.tracker_android.controller.MainController
@@ -9,11 +10,19 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 
 class FragmentHelper {
-
-    internal fun showAndAddToBackStack(fragment: Fragment, executor: Executor = mExecutor()) {
+    internal fun replaceFragment(fragment: Fragment, executor: Executor = mExecutor()) {
         executor.launchMain {
             MainController.startActivity()
             MainController.fragmentHostActivity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_host, fragment).commit()
+        }
+    }
+
+    internal fun showAndAddToBackStack(fragment: Fragment, executor: Executor = mExecutor(), animEnter: Int = 0, animExit: Int = 0, animPop: Int = 0) {
+        executor.launchMain {
+            MainController.startActivity()
+            MainController.fragmentHostActivity.supportFragmentManager.beginTransaction()
+                .setCustomAnimations(animEnter, 0, 0, animPop)
                 .addToBackStack(fragment.toString())
                 .add(R.id.fragment_container_host, fragment)
                 .commit()

@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         applicationContext?.let { viewModel.initializeController(it.applicationContext) }
         Log.d("dexter", "main activity")
-        MainController.showWelcome()
+        MainController.showHomePage()
+//        MainController.showWelcome()
         supportActionBar?.hide()
     }
 }
